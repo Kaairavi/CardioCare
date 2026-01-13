@@ -1,13 +1,15 @@
 import pandas as pd
 import pickle
 from flask import Flask, request, jsonify
+import os
 
 app = Flask(__name__)
 
 # 1. Load the trained Pipeline
 # This pipeline already contains the scaler and the model
 try:
-    with open('model/model.pkl', 'rb') as f:
+    model_path = os.path.join(os.path.dirname(__file__), 'model/model.pkl')
+    with open(model_path, 'rb') as f:
         model = pickle.load(f)
     print("Success: Model pipeline loaded!")
 except FileNotFoundError:
@@ -78,4 +80,5 @@ def predict():
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000)
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host="0.0.0.0", port=port)
