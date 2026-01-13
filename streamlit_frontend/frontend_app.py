@@ -367,9 +367,10 @@ elif st.session_state.page == "risk":
                 "alco": 1 if alco else 0,
                 "active": 1 if active == "Yes" else 0
             }
+            status_placeholder = st.empty()
 
             try:
-                response = requests.post("http://127.0.0.1:5000/predict", json=payload)
+                response = requests.post("https://cardiocare-btq38fqvuu3rj5ovappwm49.streamlit.app/predict", json=payload)
                 result = response.json()
 
                 if response.status_code == 200:
