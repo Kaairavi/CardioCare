@@ -369,7 +369,7 @@ elif st.session_state.page == "risk":
             status_placeholder = st.empty()
 
             try:
-                response = requests.post("https://cardiocare-btq38fqvuu3rj5ovappwm49.streamlit.app/predict", json=payload)
+                response = requests.post("https://cardiocare-production-cba0.up.railway.app/predict", json=payload)
                 result = response.json()
 
                 if response.status_code == 200:
